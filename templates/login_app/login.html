@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acceso institucional | Avisos UNAE</title>
+    <title>Acceso institucional</title>
     <link rel="stylesheet" href="{% static 'login_app/login.css' %}">
 </head>
 <body>
@@ -19,7 +19,7 @@
             </p>
             <div class="institution-line">
                 <span class="institution-dot"></span>
-                <span>Obligado · 2026</span>
+                <span>Obligado · 2026 · @srwilliamn1</span>
             </div>
         </section>
 
@@ -27,17 +27,19 @@
             <div class="form-heading">
                 <p class="eyebrow">Acceso seguro</p>
                 <h2 id="login-title">Iniciar sesión</h2>
-                <p>Utiliza tu correo institucional para continuar.</p>
+                <p>Ingrese su cédula de identidad para continuar.</p>
             </div>
 
             <form id="login-form" novalidate>
-                <label for="correo">Correo electrónico</label>
+                <label for="cedula">Cédula de identidad</label>
                 <input
-                    id="correo"
-                    name="correo"
-                    type="email"
-                    autocomplete="email"
-                    placeholder="nombre@institucion.edu.py"
+                    id="cedula"
+                    name="cedula"
+                    type="text"
+                    inputmode="numeric"
+                    autocomplete="username"
+                    placeholder="Ej.: 1234567"
+                    maxlength="20"
                     required
                 >
 

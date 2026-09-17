@@ -1,5 +1,5 @@
 const form = document.querySelector('#login-form');
-const emailInput = document.querySelector('#correo');
+const cedulaInput = document.querySelector('#cedula');
 const passwordInput = document.querySelector('#password');
 const message = document.querySelector('#form-message');
 const submitButton = document.querySelector('#submit-button');
@@ -19,8 +19,8 @@ form.addEventListener('submit', async (event) => {
     message.textContent = '';
     message.classList.remove('success');
 
-    if (!emailInput.value.trim() || !passwordInput.value) {
-        message.textContent = 'Completa tu correo y contraseña para continuar.';
+    if (!cedulaInput.value.trim() || !passwordInput.value) {
+        message.textContent = 'Completa tu cédula y contraseña para continuar.';
         return;
     }
 
@@ -32,7 +32,7 @@ form.addEventListener('submit', async (event) => {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                correo: emailInput.value.trim(),
+                cedula: cedulaInput.value.trim(),
                 password: passwordInput.value,
             }),
         });
@@ -42,7 +42,7 @@ form.addEventListener('submit', async (event) => {
             throw new Error(data.error || 'No fue posible iniciar sesión.');
         }
 
-        message.textContent = `Bienvenido, ${data.usuario.correo}.`;
+        message.textContent = `Bienvenido. Cédula: ${data.usuario.cedula}.`;
         message.classList.add('success');
     } catch (error) {
         message.textContent = error.message;

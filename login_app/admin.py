@@ -7,12 +7,12 @@ from .models import Usuario
 @admin.register(Usuario)
 class UsuarioAdmin(UserAdmin):
     model = Usuario
-    list_display = ('email', 'first_name', 'last_name', 'rol', 'is_active')
+    list_display = ('cedula', 'first_name', 'last_name', 'rol', 'is_active')
     list_filter = ('rol', 'is_active', 'is_staff')
-    ordering = ('email',)
-    search_fields = ('email', 'first_name', 'last_name')
+    ordering = ('cedula',)
+    search_fields = ('cedula', 'first_name', 'last_name')
     fieldsets = (
-        (None, {'fields': ('email', 'password')}),
+        (None, {'fields': ('cedula', 'password')}),
         ('Información personal', {
             'fields': ('first_name', 'last_name', 'rol'),
         }),
@@ -25,6 +25,6 @@ class UsuarioAdmin(UserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'rol', 'password1', 'password2'),
+            'fields': ('cedula', 'rol', 'password1', 'password2'),
         }),
     )

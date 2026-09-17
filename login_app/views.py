@@ -14,7 +14,7 @@ def pagina_login(request):
 @csrf_exempt
 @require_POST
 def api_iniciar_sesion(request):
-    """Autentica un usuario mediante correo electrónico y contraseña."""
+    """Autentica un usuario mediante cédula de identidad y contraseña."""
     try:
         data = json.loads(request.body)
     except json.JSONDecodeError:
@@ -23,16 +23,16 @@ def api_iniciar_sesion(request):
             status=400,
         )
 
-    correo = data.get('correo', '').strip().lower()
+    cedula = str(data.get('cedula', '')).strip()
     password = data.get('password', '')
 
-    if not correo or not password:
+    if not cedula or not password:
         return JsonResponse(
-            {'error': 'El correo y la contraseña son obligatorios.'},
+            {'error': 'La cédula y la contraseña son obligatorias.'},
             status=400,
         )
 
-    user = authenticate(request, username=correo, password=password)
+    user = authenticate(request, username=cedula, password=password)
 
     if user is None:
         return JsonResponse({'error': 'Credenciales inválidas.'}, status=401)
@@ -42,7 +42,7 @@ def api_iniciar_sesion(request):
         'mensaje': 'Inicio de sesión exitoso.',
         'usuario': {
             'id': user.id,
-            'correo': user.email,
+            'cedula': user.cedula,
             'nombre': user.get_full_name(),
             'rol': user.rol,
         },

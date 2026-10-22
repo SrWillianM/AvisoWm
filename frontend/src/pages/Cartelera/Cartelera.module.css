@@ -1,0 +1,93 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+@media (max-width: 640px) {
+  .grid2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.vincularCard {
+  border-left: 4px solid var(--color-primary);
+  background: var(--color-surface);
+  animation: fadeInUp 200ms ease both;
+}
+
+.gestionarCard {
+  border-left: 4px solid var(--color-warning);
+  background: var(--color-surface);
+  animation: fadeInUp 200ms ease both;
+}
+
+.vinculosList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.vinculoItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-bg);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+}
+
+.tabsWrapper {
+  overflow-x: auto;
+}
+
+.filterBanner {
+  background: var(--color-primary-light);
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--space-4);
+}
+
+.emptyVinculosCard {
+  text-align: center;
+  padding: var(--space-10) var(--space-6);
+  border: 2px dashed var(--color-border);
+  background: var(--color-surface);
+}
+
+.emptyIcon {
+  font-size: 3rem;
+  margin-bottom: var(--space-2);
+}
+
+.emptyTitle {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: var(--space-2);
+}
+
+.emptyText {
+  color: var(--color-text-muted);
+  max-width: 480px;
+  margin: 0 auto;
+  font-size: var(--font-size-sm);
+}
+
+.avisosList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}

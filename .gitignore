@@ -1,0 +1,87 @@
+# ==============================================================================
+# .gitignore — Avisos Institucionales Obligado (UNAE 2026)
+# ==============================================================================
+
+# --- Entorno y Secretos (Seguridad Crítica) ---
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+secrets/
+
+# --- Base de datos local ---
+*.sqlite3
+*.db
+db.sqlite3
+*.dump
+*.sql
+
+# --- Python / Django ---
+*.py[cod]
+*$py.class
+__pycache__/
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+staticfiles/
+media/
+
+# --- Entornos virtuales Python ---
+.venv/
+venv/
+ENV/
+env/
+.virtualenv/
+
+# --- Node.js / Frontend ---
+node_modules/
+frontend/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+frontend/dist/
+frontend/build/
+.pnpm-debug.log*
+
+# --- Archivos temporales generados localmente ---
+frontend/public/qr_movil.png
+
+# --- Tests & Cobertura ---
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+coverage/
+
+# --- IDEs y Editores ---
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.pydevproject
+.settings/
+
+# --- Sistema Operativo ---
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini

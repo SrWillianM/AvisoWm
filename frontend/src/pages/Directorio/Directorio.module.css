@@ -1,0 +1,55 @@
+.section {
+  margin-bottom: var(--space-10);
+}
+
+.formBox {
+  margin-bottom: var(--space-6);
+  background: var(--color-bg);
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+
+@media (max-width: 640px) {
+  .grid2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-4);
+}
+
+.contactoCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.contactoHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-2);
+}
+
+.contactoDepto {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.ticketsList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.ticketCard {
+  border-left: 3px solid var(--color-border);
+}

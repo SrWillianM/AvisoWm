@@ -1,0 +1,167 @@
+[
+  {
+    "model": "usuarios.usuario",
+    "pk": 1,
+    "fields": {
+      "nombre_completo": "Lic. Pedro Danieli (Director)",
+      "cedula": "1000001",
+      "correo": "direccion@obligado.edu.py",
+      "password": "pbkdf2_sha256$720000$saltUNAEDemo2026$nbBnvYnctSQ4v7pHqm1PnnLhquhoEZV4HyDyJ+GRNzk=",
+      "rol": "Administrador",
+      "fecha_registro": "2026-10-22T08:00:00Z",
+      "is_active": true,
+      "is_staff": true,
+      "is_superuser": true
+    }
+  },
+  {
+    "model": "usuarios.usuario",
+    "pk": 2,
+    "fields": {
+      "nombre_completo": "Prof. María Belén Duarte",
+      "cedula": "2000001",
+      "correo": "mduarte@obligado.edu.py",
+      "password": "pbkdf2_sha256$720000$saltUNAEDemo2026$nbBnvYnctSQ4v7pHqm1PnnLhquhoEZV4HyDyJ+GRNzk=",
+      "rol": "Profesor",
+      "fecha_registro": "2026-10-22T08:30:00Z",
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false
+    }
+  },
+  {
+    "model": "usuarios.usuario",
+    "pk": 3,
+    "fields": {
+      "nombre_completo": "Willian Medina (Tutor)",
+      "cedula": "3000001",
+      "correo": "willian.medina@alumno.unae.edu.py",
+      "password": "pbkdf2_sha256$720000$saltUNAEDemo2026$nbBnvYnctSQ4v7pHqm1PnnLhquhoEZV4HyDyJ+GRNzk=",
+      "rol": "Padre",
+      "fecha_registro": "2026-10-22T09:00:00Z",
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false
+    }
+  },
+  {
+    "model": "cursos.cursoseccion",
+    "pk": 1,
+    "fields": {
+      "grado_curso": "3.° Grado",
+      "seccion": "A",
+      "turno": "Mañana",
+      "nivel_educativo": "EEB"
+    }
+  },
+  {
+    "model": "cursos.cursoseccion",
+    "pk": 2,
+    "fields": {
+      "grado_curso": "6.° Grado",
+      "seccion": "B",
+      "turno": "Mañana",
+      "nivel_educativo": "EEB"
+    }
+  },
+  {
+    "model": "cursos.cursoseccion",
+    "pk": 3,
+    "fields": {
+      "grado_curso": "1.° Curso Bachillerato",
+      "seccion": "A",
+      "turno": "Tarde",
+      "nivel_educativo": "EM"
+    }
+  },
+  {
+    "model": "cursos.padrecurso",
+    "pk": 1,
+    "fields": {
+      "id_usuario": 3,
+      "id_curso": 1,
+      "nombre_hijo": "Lucas Medina"
+    }
+  },
+  {
+    "model": "cursos.padrecurso",
+    "pk": 2,
+    "fields": {
+      "id_usuario": 3,
+      "id_curso": 2,
+      "nombre_hijo": "Sofía Medina"
+    }
+  },
+  {
+    "model": "avisos.aviso",
+    "pk": 1,
+    "fields": {
+      "titulo": "Inicio Oficial de Actividades Académicas 2026",
+      "contenido": "Se comunica a toda la comunidad educativa que el acto de apertura del año lectivo tendrá lugar en el polideportivo institucional a las 07:30 hs. Asistencia con uniforme de gala.",
+      "fecha_publicacion": "2026-10-22T07:00:00Z",
+      "tipo_aviso": "General",
+      "estado_activo": true,
+      "id_autor": 1,
+      "id_curso": null
+    }
+  },
+  {
+    "model": "avisos.aviso",
+    "pk": 2,
+    "fields": {
+      "titulo": "Reunión Informativa y Entrega de Guías — 3.° Grado Sección A",
+      "contenido": "Estimados padres: los esperamos este viernes a las 10:30 hs para la socialización del plan de lectura comprensiva y entrega del cronograma mensual.",
+      "fecha_publicacion": "2026-10-22T08:00:00Z",
+      "tipo_aviso": "Especifico",
+      "estado_activo": true,
+      "id_autor": 2,
+      "id_curso": 1
+    }
+  },
+  {
+    "model": "avisos.aviso",
+    "pk": 3,
+    "fields": {
+      "titulo": "Feria de Ciencias y Tecnología — 6.° Grado Sección B",
+      "contenido": "Recordamos que los materiales para la maqueta grupal deben presentarse completos el próximo lunes a primera hora.",
+      "fecha_publicacion": "2026-10-22T09:15:00Z",
+      "tipo_aviso": "Especifico",
+      "estado_activo": true,
+      "id_autor": 2,
+      "id_curso": 2
+    }
+  },
+  {
+    "model": "directorio.contactoutil",
+    "pk": 1,
+    "fields": {
+      "departamento": "Secretaría General Académica",
+      "nombre_encargado": "Lic. Claudia Romero",
+      "telefono": "071-205100",
+      "correo_contacto": "secretaria@obligado.edu.py",
+      "horario_atencion": "Lunes a Viernes 07:00 a 12:30 hs"
+    }
+  },
+  {
+    "model": "directorio.contactoutil",
+    "pk": 2,
+    "fields": {
+      "departamento": "Dirección General Institucional",
+      "nombre_encargado": "Prof. Pedro Ramón Danieli Acuña",
+      "telefono": "0985-234567",
+      "correo_contacto": "direccion@obligado.edu.py",
+      "horario_atencion": "Lunes a Viernes 07:00 a 15:00 hs"
+    }
+  },
+  {
+    "model": "directorio.reportesoporte",
+    "pk": 1,
+    "fields": {
+      "asunto": "Consulta de validación de correo",
+      "mensaje": "Quisiera actualizar el correo registrado para recibir notificaciones adicionales.",
+      "fecha_envio": "2026-10-22T10:30:00Z",
+      "estado": "Resuelto",
+      "id_usuario": 3
+    }
+  }
+]

@@ -26,7 +26,7 @@ services:
     environment:
       SECRET_KEY: ${SECRET_KEY:-django-insecure-key-avisos-obligado-2026}
       DEBUG: ${DEBUG:-False}
-      ALLOWED_HOSTS: ${ALLOWED_HOSTS:-localhost,127.0.0.1,backend,frontend}
+      ALLOWED_HOSTS: ${ALLOWED_HOSTS:-*}
       DB_NAME: ${DB_NAME:-avisos_db}
       DB_USER: ${DB_USER:-avisos_user}
       DB_PASSWORD: ${DB_PASSWORD:-avisos_pass2026}

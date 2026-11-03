@@ -1,15 +1,76 @@
 .header {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  gap: var(--space-4);
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
   flex-wrap: wrap;
+}
+
+.heading {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.counterRow {
+  font-size: 0.875rem;
+  color: #64748b;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+.tabsContainer {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  margin-bottom: 4px;
+}
+
+.tabsContainer::-webkit-scrollbar {
+  display: none;
+}
+
+/* Tarjetas modales de formulario */
+.modalCard {
+  background: var(--color-surface);
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
+  padding: 18px 20px;
+  margin-bottom: 20px;
+}
+
+.closeBtn {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: all 150ms ease;
+}
+
+.closeBtn:hover {
+  color: #0f172a;
+  background-color: #f1f5f9;
 }
 
 .grid2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--space-4);
+  gap: 12px;
 }
 
 @media (max-width: 640px) {
@@ -18,76 +79,65 @@
   }
 }
 
-.vincularCard {
-  border-left: 4px solid var(--color-primary);
-  background: var(--color-surface);
-  animation: fadeInUp 200ms ease both;
-}
-
-.gestionarCard {
-  border-left: 4px solid var(--color-warning);
-  background: var(--color-surface);
-  animation: fadeInUp 200ms ease both;
-}
-
 .vinculosList {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  gap: 8px;
 }
 
 .vinculoItem {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--space-3) var(--space-4);
-  background: var(--color-bg);
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--color-border);
+  padding: 10px 14px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
 }
 
-.tabsWrapper {
-  overflow-x: auto;
-}
-
-.filterBanner {
-  background: var(--color-primary-light);
-  border: 1px solid var(--color-primary);
-  color: var(--color-primary);
-  padding: var(--space-3) var(--space-4);
-  border-radius: var(--radius-md);
-  font-size: var(--font-size-sm);
-  margin-bottom: var(--space-4);
-}
-
-.emptyVinculosCard {
+.emptyCard {
   text-align: center;
-  padding: var(--space-10) var(--space-6);
-  border: 2px dashed var(--color-border);
+  padding: 36px 20px;
+  border: 1px dashed #cbd5e1;
   background: var(--color-surface);
-}
-
-.emptyIcon {
-  font-size: 3rem;
-  margin-bottom: var(--space-2);
+  border-radius: 14px;
+  margin-bottom: 20px;
 }
 
 .emptyTitle {
-  font-size: var(--font-size-lg);
-  font-weight: 700;
-  color: var(--color-text);
-  margin-bottom: var(--space-2);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin-bottom: 6px;
 }
 
 .emptyText {
-  color: var(--color-text-muted);
-  max-width: 480px;
+  color: #64748b;
+  font-size: 0.875rem;
+  max-width: 380px;
   margin: 0 auto;
-  font-size: var(--font-size-sm);
 }
 
-.avisosList {
+.listSection {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+}
+
+@media (max-width: 640px) {
+  .header {
+    margin-bottom: 8px;
+  }
+
+  .heading {
+    font-size: 1.35rem;
+  }
+
+  .actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .actions button {
+    flex: 1;
+  }
 }

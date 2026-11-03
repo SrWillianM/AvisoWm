@@ -67,11 +67,9 @@ export default function GestionAvisos() {
 
     try {
       if (editingId) {
-        // RF-07: Edición
         await client.patch(`/avisos/${editingId}/`, payload);
         setSuccess('Aviso actualizado correctamente.');
       } else {
-        // RF-03 / RF-04: Publicación
         await client.post('/avisos/', payload);
         setSuccess('Aviso publicado con éxito.');
       }
@@ -117,7 +115,7 @@ export default function GestionAvisos() {
 
   return (
     <div className="page-container">
-      <h1 className="page-title">📢 Gestión y Emisión de Avisos</h1>
+      <h1 className="page-title">Gestión de Avisos</h1>
 
       {error && <div className="alert alert-error">{error}</div>}
       {success && <div className="alert alert-success">{success}</div>}
@@ -125,19 +123,19 @@ export default function GestionAvisos() {
       {/* Formulario de Emisión / Edición */}
       <section className={`card ${styles.formCard}`}>
         <h2 className="page-subtitle">
-          {editingId ? 'Editar Aviso' : 'Publicar Nuevo Aviso'}
+          {editingId ? 'Editar Aviso' : 'Nuevo Aviso'}
         </h2>
 
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label className="form-label" htmlFor="titulo">Título del Aviso</label>
+            <label className="form-label" htmlFor="titulo">Título</label>
             <input
               id="titulo"
               type="text"
               className="form-input"
               value={titulo}
               onChange={(e) => setTitulo(e.target.value)}
-              placeholder="Ej: Suspensión de clases presenciales por inclemencias"
+              placeholder="Ej: Actividades de inicio del año lectivo"
               required
             />
           </div>
@@ -149,7 +147,7 @@ export default function GestionAvisos() {
               className="form-input"
               value={contenido}
               onChange={(e) => setContenido(e.target.value)}
-              placeholder="Detalle del comunicado oficial..."
+              placeholder="Escriba el comunicado oficial..."
               rows={4}
               required
             />
@@ -157,7 +155,7 @@ export default function GestionAvisos() {
 
           <div className={styles.twoCols}>
             <div className="form-group">
-              <label className="form-label" htmlFor="tipoAviso">Alcance (Tipo de Aviso)</label>
+              <label className="form-label" htmlFor="tipoAviso">Alcance</label>
               <select
                 id="tipoAviso"
                 className="form-input"
@@ -167,8 +165,8 @@ export default function GestionAvisos() {
                   if (e.target.value === 'General') setIdCurso('');
                 }}
               >
-                {isAdmin && <option value="General">General (Toda la Institución)</option>}
-                <option value="Especifico">Específico por Curso / Sección</option>
+                {isAdmin && <option value="General">General (Institucional)</option>}
+                <option value="Especifico">Específico por Curso</option>
               </select>
             </div>
 
@@ -182,10 +180,10 @@ export default function GestionAvisos() {
                   onChange={(e) => setIdCurso(e.target.value)}
                   required={tipoAviso === 'Especifico'}
                 >
-                  <option value="">Seleccione un curso...</option>
+                  <option value="">Seleccione curso...</option>
                   {cursos.map((c) => (
                     <option key={c.id_curso} value={c.id_curso}>
-                      {c.grado_curso} "{c.seccion}" — {c.turno} ({c.nivel_educativo})
+                      {c.grado_curso} "{c.seccion}" — {c.turno}
                     </option>
                   ))}
                 </select>
@@ -194,12 +192,12 @@ export default function GestionAvisos() {
           </div>
 
           <div className="flex gap-2 mt-4">
-            <button type="submit" className="btn btn-primary" disabled={submitting}>
-              {submitting ? <span className="spinner" /> : editingId ? 'Guardar Cambios' : 'Publicar Aviso'}
+            <button type="submit" className="btn btn-primary btn-sm" disabled={submitting}>
+              {submitting ? <span className="spinner" /> : editingId ? 'Guardar Cambios' : 'Publicar'}
             </button>
             {editingId && (
-              <button type="button" className="btn btn-ghost" onClick={limpiarFormulario}>
-                Cancelar Edición
+              <button type="button" className="btn btn-ghost btn-sm" onClick={limpiarFormulario}>
+                Cancelar
               </button>
             )}
           </div>
@@ -208,7 +206,7 @@ export default function GestionAvisos() {
 
       {/* Listado para Administrador / Profesor */}
       <section className="mt-6">
-        <h2 className="page-subtitle">Historial de Avisos Emitidos</h2>
+        <h2 className="page-subtitle">Avisos Emitidos</h2>
 
         {loading ? (
           <LoadingSpinner />
@@ -224,7 +222,7 @@ export default function GestionAvisos() {
                   <th>Fecha</th>
                   <th>Tipo</th>
                   <th>Título</th>
-                  <th>Curso / Alcance</th>
+                  <th>Alcance</th>
                   <th>Estado</th>
                   <th style={{ textAlign: 'right' }}>Acciones</th>
                 </tr>

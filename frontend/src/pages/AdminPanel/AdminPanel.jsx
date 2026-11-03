@@ -111,7 +111,7 @@ export default function AdminPanel() {
 
   return (
     <div className="page-container">
-      <h1 className="page-title">⚙ Panel de Administración Central</h1>
+      <h1 className="page-title">Panel de Administración</h1>
 
       {feedback.text && (
         <div className={`alert ${feedback.type === 'success' ? 'alert-success' : 'alert-error'}`}>

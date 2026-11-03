@@ -3,37 +3,64 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--space-4);
-  background: var(--color-bg);
+  padding: 16px;
+  background-color: #f8fafc;
 }
 
 .form {
   background: var(--color-surface);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-lg);
-  padding: var(--space-10);
+  border-radius: 20px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.07);
+  padding: 36px 32px;
   width: 100%;
   max-width: 400px;
-  animation: fadeInUp 300ms ease both;
+  animation: fadeInUp 250ms ease both;
 }
 
-.logo {
-  font-size: 3rem;
+.brandRow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  margin-bottom: var(--space-2);
+  margin-bottom: 24px;
+}
+
+.logoBadge {
+  width: 52px;
+  height: 52px;
+  background-color: #2563eb;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.28);
+  margin-bottom: 12px;
+}
+
+.capIcon {
+  width: 30px;
+  height: 30px;
+  color: #ffffff;
 }
 
 .title {
-  font-size: var(--font-size-xl);
+  font-size: 1.5rem;
   font-weight: 700;
-  text-align: center;
-  color: var(--color-text);
-  margin-bottom: var(--space-1);
+  color: #0f172a;
+  letter-spacing: -0.02em;
+  margin: 0 0 4px 0;
 }
 
 .subtitle {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-muted);
-  text-align: center;
-  margin-bottom: var(--space-8);
+  font-size: 0.8125rem;
+  color: #64748b;
+  margin: 0;
+}
+
+@media (max-width: 480px) {
+  .form {
+    padding: 28px 20px;
+    border-radius: 16px;
+  }
 }

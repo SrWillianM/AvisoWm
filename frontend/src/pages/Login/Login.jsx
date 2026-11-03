@@ -17,7 +17,6 @@ export default function Login() {
     setLoading(true);
     try {
       const user = await login(cedula, password);
-      // Redirigir según rol
       if (user.rol === 'Administrador') navigate('/admin');
       else if (user.rol === 'Profesor') navigate('/gestion-avisos');
       else navigate('/cartelera');
@@ -35,19 +34,36 @@ export default function Login() {
   return (
     <div className={styles.wrapper}>
       <form onSubmit={handleSubmit} className={styles.form}>
-        <div className={styles.logo}>📋</div>
-        <h1 className={styles.title}>Avisos Institucionales</h1>
-        <p className={styles.subtitle}>Obligado — Sistema de Comunicación</p>
+        <div className={styles.brandRow}>
+          <div className={styles.logoBadge}>
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className={styles.capIcon}
+            >
+              <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+              <path d="M6 12v5c3 3 9 3 12 0v-5" />
+            </svg>
+          </div>
+          <h1 className={styles.title}>SCAU</h1>
+          <p className={styles.subtitle}>Sistema Centralizado de Avisos</p>
+        </div>
 
         {error && <div className="alert alert-error">{error}</div>}
 
         <div className="form-group">
-          <label className="form-label" htmlFor="cedula">Cédula de Identidad</label>
+          <label className="form-label" htmlFor="cedula">
+            Cédula de Identidad
+          </label>
           <input
             id="cedula"
             type="text"
             className="form-input"
-            placeholder="Ej: 1234567"
+            placeholder="Ej: 3000001"
             value={cedula}
             onChange={(e) => setCedula(e.target.value)}
             required
@@ -56,7 +72,9 @@ export default function Login() {
         </div>
 
         <div className="form-group">
-          <label className="form-label" htmlFor="password">Contraseña</label>
+          <label className="form-label" htmlFor="password">
+            Contraseña
+          </label>
           <input
             id="password"
             type="password"
@@ -70,8 +88,8 @@ export default function Login() {
 
         <button
           type="submit"
-          className="btn btn-primary btn-lg"
-          style={{ width: '100%' }}
+          className="btn btn-primary btn-lg mt-4"
+          style={{ width: '100%', minHeight: '46px' }}
           disabled={loading}
         >
           {loading ? <span className="spinner" /> : 'Iniciar Sesión'}

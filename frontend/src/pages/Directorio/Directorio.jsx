@@ -33,7 +33,7 @@ export default function Directorio() {
       const res = await client.get('/contactos/');
       setContactos(res.data.results || res.data);
     } catch {
-      setFeedback({ text: 'Error al cargar contactos útiles.', type: 'error' });
+      setFeedback({ text: 'Error al cargar contactos.', type: 'error' });
     } finally {
       setLoadingContactos(false);
     }
@@ -45,7 +45,7 @@ export default function Directorio() {
       const res = await client.get('/soporte/');
       setReportes(res.data.results || res.data);
     } catch {
-      setFeedback({ text: 'Error al cargar reportes de soporte.', type: 'error' });
+      setFeedback({ text: 'Error al cargar reportes.', type: 'error' });
     } finally {
       setLoadingReportes(false);
     }
@@ -87,7 +87,7 @@ export default function Directorio() {
         mensaje,
       });
       setReportes((prev) => [data, ...prev]);
-      setFeedback({ text: 'Reporte de soporte enviado. Estado: Pendiente.', type: 'success' });
+      setFeedback({ text: 'Reporte enviado correctamente.', type: 'success' });
       setShowFormTicket(false);
       setAsunto('');
       setMensaje('');
@@ -106,13 +106,13 @@ export default function Directorio() {
       );
       setFeedback({ text: `Estado actualizado a "${nuevoEstado}".`, type: 'success' });
     } catch (err) {
-      setFeedback({ text: 'No se pudo actualizar el estado del ticket.', type: 'error' });
+      setFeedback({ text: 'No se pudo actualizar el estado.', type: 'error' });
     }
   };
 
   return (
     <div className="page-container">
-      <h1 className="page-title">☎ Directorio Institucional & Soporte Técnico</h1>
+      <h1 className="page-title">Directorio y Soporte</h1>
 
       {feedback.text && (
         <div className={`alert ${feedback.type === 'success' ? 'alert-success' : 'alert-error'}`}>
@@ -122,8 +122,8 @@ export default function Directorio() {
 
       {/* SECCIÓN 1: Directorio Institucional (RF-08) */}
       <section className={styles.section}>
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="page-subtitle" style={{ margin: 0 }}>Directorio de Contactos Útiles</h2>
+        <div className="flex justify-between items-center mb-3">
+          <h2 className="page-subtitle" style={{ margin: 0 }}>Contactos Útiles</h2>
           {isAdmin && (
             <button
               className="btn btn-primary btn-sm"
@@ -136,7 +136,7 @@ export default function Directorio() {
 
         {showFormContacto && isAdmin && (
           <form onSubmit={handleCrearContacto} className={`card ${styles.formBox}`}>
-            <h3 className="text-sm font-semibold mb-4">Nuevo Contacto Institucional</h3>
+            <h3 className="text-sm font-semibold mb-3">Nuevo Contacto</h3>
             <div className={styles.grid2}>
               <div className="form-group">
                 <label className="form-label">Departamento</label>
@@ -149,7 +149,7 @@ export default function Directorio() {
                 />
               </div>
               <div className="form-group">
-                <label className="form-label">Nombre del Encargado</label>
+                <label className="form-label">Encargado</label>
                 <input
                   className="form-input"
                   value={encargado}
@@ -164,12 +164,12 @@ export default function Directorio() {
                   className="form-input"
                   value={telefono}
                   onChange={(e) => setTelefono(e.target.value)}
-                  placeholder="Ej: 071-205000 / 0985-123456"
+                  placeholder="Ej: 071-205000"
                   required
                 />
               </div>
               <div className="form-group">
-                <label className="form-label">Correo Institucional (Opcional)</label>
+                <label className="form-label">Correo (Opcional)</label>
                 <input
                   type="email"
                   className="form-input"
@@ -190,7 +190,7 @@ export default function Directorio() {
               />
             </div>
             <div className="flex gap-2">
-              <button type="submit" className="btn btn-primary btn-sm">Guardar Contacto</button>
+              <button type="submit" className="btn btn-primary btn-sm">Guardar</button>
               <button
                 type="button"
                 className="btn btn-ghost btn-sm"
@@ -206,7 +206,7 @@ export default function Directorio() {
           <LoadingSpinner />
         ) : contactos.length === 0 ? (
           <div className="empty-state">
-            <p>No hay contactos institucionales cargados todavía.</p>
+            <p>No hay contactos registrados.</p>
           </div>
         ) : (
           <div className={styles.cardsGrid}>
@@ -214,14 +214,14 @@ export default function Directorio() {
               <div key={c.id_contacto} className={`card ${styles.contactoCard}`}>
                 <div className={styles.contactoHeader}>
                   <h3 className={styles.contactoDepto}>{c.departamento}</h3>
-                  <span className="badge badge-primary">Oficial</span>
+                  <span className="badge badge-primary">Institucional</span>
                 </div>
                 <p className="text-sm"><strong>Encargado:</strong> {c.nombre_encargado}</p>
                 <p className="text-sm"><strong>Teléfono:</strong> <a href={`tel:${c.telefono}`}>{c.telefono}</a></p>
                 {c.correo_contacto && (
                   <p className="text-sm"><strong>Correo:</strong> <a href={`mailto:${c.correo_contacto}`}>{c.correo_contacto}</a></p>
                 )}
-                <p className="text-xs text-muted mt-2"><strong>Horario:</strong> {c.horario_atencion}</p>
+                <p className="text-xs text-muted mt-2">{c.horario_atencion}</p>
               </div>
             ))}
           </div>
@@ -230,14 +230,9 @@ export default function Directorio() {
 
       {/* SECCIÓN 2: Soporte Técnico (RF-09, RN-06) */}
       <section className={styles.section}>
-        <div className="flex justify-between items-center mb-4">
+        <div className="flex justify-between items-center mb-3">
           <div>
-            <h2 className="page-subtitle" style={{ margin: 0 }}>Mesa de Ayuda y Soporte Técnico</h2>
-            <p className="text-xs text-muted">
-              {isAdmin
-                ? 'Panel de resolución de reportes de usuarios'
-                : '¿Tiene dificultades técnicas? Envíenos un reporte.'}
-            </p>
+            <h2 className="page-subtitle" style={{ margin: 0 }}>Soporte Técnico</h2>
           </div>
           <button
             className="btn btn-primary btn-sm"
@@ -249,30 +244,30 @@ export default function Directorio() {
 
         {showFormTicket && (
           <form onSubmit={handleCrearTicket} className={`card ${styles.formBox}`}>
-            <h3 className="text-sm font-semibold mb-4">Nuevo Reporte de Incidencia</h3>
+            <h3 className="text-sm font-semibold mb-3">Nuevo Reporte</h3>
             <div className="form-group">
               <label className="form-label">Asunto</label>
               <input
                 className="form-input"
                 value={asunto}
                 onChange={(e) => setAsunto(e.target.value)}
-                placeholder="Ej: Dificultad para visualizar avisos del 3.° Grado"
+                placeholder="Ej: Dificultad para visualizar avisos"
                 required
               />
             </div>
             <div className="form-group">
-              <label className="form-label">Detalle del Problema</label>
+              <label className="form-label">Mensaje</label>
               <textarea
                 className="form-input"
                 rows={3}
                 value={mensaje}
                 onChange={(e) => setMensaje(e.target.value)}
-                placeholder="Describa lo que ocurre con el mayor detalle posible..."
+                placeholder="Describa el inconveniente..."
                 required
               />
             </div>
             <div className="flex gap-2">
-              <button type="submit" className="btn btn-primary btn-sm">Enviar Reporte</button>
+              <button type="submit" className="btn btn-primary btn-sm">Enviar</button>
               <button
                 type="button"
                 className="btn btn-ghost btn-sm"
@@ -288,7 +283,7 @@ export default function Directorio() {
           <LoadingSpinner />
         ) : reportes.length === 0 ? (
           <div className="empty-state">
-            <p>No hay reportes de soporte en curso.</p>
+            <p>No hay reportes de soporte pendientes.</p>
           </div>
         ) : (
           <div className={styles.ticketsList}>
@@ -310,18 +305,21 @@ export default function Directorio() {
                 </div>
                 <p className="text-sm text-muted mb-3">{rep.mensaje}</p>
 
-                <div className="flex justify-between items-center text-xs text-muted">
+                <div className="flex justify-between items-center text-xs text-muted flex-wrap gap-2">
                   <span>
-                    Remitente: <strong>{rep.usuario_nombre || `Usuario #${rep.id_usuario}`}</strong> —{' '}
+                    {rep.usuario_nombre || `Usuario #${rep.id_usuario}`} —{' '}
                     {new Date(rep.fecha_envio).toLocaleDateString('es-PY', {
-                      day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit'
+                      day: '2-digit',
+                      month: 'short',
+                      year: 'numeric',
+                      hour: '2-digit',
+                      minute: '2-digit',
                     })}
                   </span>
 
-                  {/* RN-06: Transición de estado exclusiva de Administrador */}
                   {isAdmin && (
                     <div className="flex gap-2 items-center">
-                      <span className="text-xs font-semibold">Cambiar Estado:</span>
+                      <span className="text-xs font-semibold">Estado:</span>
                       <select
                         className="form-input"
                         style={{ padding: '0.2rem 0.5rem', fontSize: '0.75rem', width: 'auto' }}

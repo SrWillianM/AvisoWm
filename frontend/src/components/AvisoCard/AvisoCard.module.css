@@ -1,55 +1,217 @@
 .card {
   background: var(--color-surface);
-  border-radius: var(--radius-md);
-  border: 1px solid var(--color-border);
-  box-shadow: var(--shadow-sm);
-  padding: var(--space-5);
-  border-left: 4px solid transparent;
-  animation: fadeInUp 200ms ease both;
-  transition: box-shadow var(--transition-slow);
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  padding: 20px 22px;
+  margin-bottom: 14px;
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+  position: relative;
 }
-.card:hover { box-shadow: var(--shadow-md); }
-.general   { border-left-color: var(--color-primary); }
-.especifico { border-left-color: var(--color-success); }
 
-.header {
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+  border-color: #cbd5e1;
+}
+
+/* Fila superior */
+.topRow {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: var(--space-3);
+  gap: 12px;
+  margin-bottom: 10px;
 }
 
-.date {
-  font-size: var(--font-size-xs);
-  color: var(--color-text-subtle);
+.tagsGroup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
-.title {
-  font-size: var(--font-size-lg);
+.badgeNuevo {
+  display: inline-flex;
+  align-items: center;
+  background-color: #ef4444;
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+}
+
+.badgeGeneral {
+  display: inline-flex;
+  align-items: center;
+  background-color: #dbeafe;
+  color: #1e40af;
+  font-size: 0.75rem;
   font-weight: 600;
-  margin-bottom: var(--space-2);
-  color: var(--color-text);
+  padding: 3px 12px;
+  border-radius: 9999px;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
 }
 
+.badgeEspecifico {
+  display: inline-flex;
+  align-items: center;
+  background-color: #e0f2fe;
+  color: #0369a1;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 3px 12px;
+  border-radius: 9999px;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+}
+
+.separator {
+  color: #94a3b8;
+  font-size: 0.75rem;
+}
+
+.dateText {
+  color: #64748b;
+  font-size: 0.8125rem;
+  font-weight: 400;
+}
+
+/* Botón flecha derecha */
+.arrowBtn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #eff6ff;
+  color: #2563eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background-color 150ms ease, transform 150ms ease;
+}
+
+.arrowBtn:hover {
+  background-color: #dbeafe;
+  transform: scale(1.05);
+}
+
+.chevronIcon {
+  width: 18px;
+  height: 18px;
+  transition: transform 180ms ease;
+}
+
+.arrowExpanded .chevronIcon {
+  transform: rotate(90deg);
+}
+
+/* Título */
+.title {
+  color: #1d4ed8;
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.4;
+  margin: 0 0 8px 0;
+  cursor: pointer;
+  transition: color 150ms ease;
+}
+
+.title:hover {
+  color: #1e40af;
+}
+
+/* Contenido */
 .content {
-  font-size: var(--font-size-base);
-  color: var(--color-text-muted);
-  line-height: var(--line-height);
-  margin-bottom: var(--space-4);
+  color: #334155;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  margin: 0 0 14px 0;
+  word-break: break-word;
 }
 
+.contentClamped {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Pie de tarjeta */
 .footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: var(--font-size-xs);
-  color: var(--color-text-subtle);
+  gap: 12px;
+  padding-top: 10px;
+  border-top: 1px solid #f1f5f9;
+  flex-wrap: wrap;
 }
 
-.author { font-weight: 500; }
+.authorGroup {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #2563eb;
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
 
-.curso {
-  background: var(--color-bg);
-  padding: 0.1rem 0.5rem;
-  border-radius: var(--radius-full);
+.authorIcon {
+  width: 15px;
+  height: 15px;
+  color: #2563eb;
+  flex-shrink: 0;
+}
+
+.authorText {
+  color: #1d4ed8;
+}
+
+.cursoTag {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  color: #475569;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 9999px;
+}
+
+.cursoIcon {
+  width: 13px;
+  height: 13px;
+  color: #64748b;
+  flex-shrink: 0;
+}
+
+@media (max-width: 640px) {
+  .card {
+    padding: 16px 14px;
+    border-radius: 14px;
+    margin-bottom: 12px;
+  }
+
+  .title {
+    font-size: 0.98rem;
+  }
+
+  .content {
+    font-size: 0.88rem;
+  }
+
+  .footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
 }

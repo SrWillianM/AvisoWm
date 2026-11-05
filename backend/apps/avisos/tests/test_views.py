@@ -79,6 +79,20 @@ class TestCP04AvisoEspecifico:
         )
         assert response.status_code == status.HTTP_400_BAD_REQUEST
 
+    def test_padre_no_puede_publicar_aviso_especifico(self, padre_client, curso_sample):
+        """Padre intenta publicar aviso específico → HTTP 403 (RBAC mitigación BOLA)."""
+        response = padre_client.post(
+            self.url,
+            {
+                "titulo": "Intento de padre",
+                "contenido": "No tiene permisos para emitir comunicados.",
+                "tipo_aviso": "Especifico",
+                "id_curso": curso_sample.id_curso,
+            },
+            format="json",
+        )
+        assert response.status_code == status.HTTP_403_FORBIDDEN
+
 
 # ===========================================================================
 # CP-05: Cartelera Padre (RF-05, RN-04)

@@ -1,25 +1,31 @@
 /**
- * store/authStore.js — Context API + useReducer para autenticación.
+ * authStore.jsx — Gestión Centralizada del Estado de Autenticación y Sesión de Usuario.
+ * 
+ * Patrón de Arquitectura: Context API + useReducer (React 18).
+ * Propósito:
+ * 1. Proporciona un estado global reactivo (`user`, `isAuthenticated`, `loading`).
+ * 2. Administra el ciclo de vida de la sesión (login, logout, hidratación desde localStorage).
+ * 3. Expone el hook personalizado `useAuth()` para que cualquier componente acceda al usuario actual.
  */
 
 import React, { createContext, useContext, useEffect, useReducer } from 'react';
 import client from '../api/client';
 
-// ── State ──
+// ── 1. Estado Inicial de la Aplicación ──
 const initialState = {
-  user: null,
-  isAuthenticated: false,
-  loading: true,
+  user: null,              // Objeto con id_usuario, nombre_completo, rol
+  isAuthenticated: false,  // Booleano para control de guardias de rutas protegidas
+  loading: true,           // Flag para evitar parpadeos visuales durante la verificación inicial
 };
 
-// ── Actions ──
+// ── 2. Tipos de Acciones (Actions) ──
 const AUTH_ACTIONS = {
   LOGIN_SUCCESS: 'LOGIN_SUCCESS',
   LOGOUT: 'LOGOUT',
   SET_LOADING: 'SET_LOADING',
 };
 
-// ── Reducer ──
+// ── 3. Reducer: Función pura que calcula el nuevo estado según la acción emitida ──
 function authReducer(state, action) {
   switch (action.type) {
     case AUTH_ACTIONS.LOGIN_SUCCESS:
@@ -38,13 +44,17 @@ function authReducer(state, action) {
   }
 }
 
-// ── Context ──
+// ── 4. Creación del Contexto de React ──
 const AuthContext = createContext(null);
 
+/**
+ * Proveedor del Contexto (AuthProvider):
+ * Envuelve a toda la aplicación en `App.jsx` para distribuir el estado global.
+ */
 export function AuthProvider({ children }) {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
-  // Verificar token al montar
+  // Efecto de Hidratación: al cargar la página o refrescar F5, recupera la sesión activa
   useEffect(() => {
     const token = localStorage.getItem('access_token');
     const user = localStorage.getItem('user');
@@ -52,6 +62,7 @@ export function AuthProvider({ children }) {
       try {
         dispatch({ type: AUTH_ACTIONS.LOGIN_SUCCESS, payload: JSON.parse(user) });
       } catch {
+        // En caso de datos corruptos en el almacenamiento local, limpia y resetea
         localStorage.clear();
         dispatch({ type: AUTH_ACTIONS.LOGOUT });
       }
@@ -60,6 +71,11 @@ export function AuthProvider({ children }) {
     }
   }, []);
 
+  /**
+   * Acción de Login:
+   * Envía cédula y contraseña al endpoint REST `/api/auth/login/`.
+   * Al recibir 200 OK, almacena el par de tokens JWT y la identidad del usuario.
+   */
   const login = async (cedula, password) => {
     const { data } = await client.post('/auth/login/', { cedula, password });
     localStorage.setItem('access_token', data.access);
@@ -69,6 +85,10 @@ export function AuthProvider({ children }) {
     return data.user;
   };
 
+  /**
+   * Acción de Logout:
+   * Destruye las credenciales y tokens locales, devolviendo el estado a no autenticado.
+   */
   const logout = () => {
     localStorage.clear();
     dispatch({ type: AUTH_ACTIONS.LOGOUT });
@@ -81,10 +101,14 @@ export function AuthProvider({ children }) {
   );
 }
 
+/**
+ * Hook personalizado useAuth:
+ * Facilita el consumo del contexto en componentes funcionales (ej. `const { user, logout } = useAuth();`).
+ */
 export function useAuth() {
   const context = useContext(AuthContext);
   if (!context) {
-    throw new Error('useAuth debe usarse dentro de un AuthProvider');
+    throw new Error('useAuth debe usarse obligatoriamente dentro de un AuthProvider');
   }
   return context;
 }
